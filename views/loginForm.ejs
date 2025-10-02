@@ -6,6 +6,27 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div id="container-login">
+        <form id="login-form">
+            <h2>Login</h2>
+            <label for="login-username">Username:</label>
+            <input type="text" id="login-username" name="username" required>
+
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" required>
+
+            <button type="submit">Login</button>
+            <span>&nbsp;</span><!--&nbsp= espacio en blanco-->;
+        </form>
+    </div>
+
+    <script>
+
+        const $=el=>document.querySelector(el);
+
+        const signupForm=$('#login-form');
+        const signupSpan=$('#login-form span');
+    </script>
 </body>
+
 </html>
