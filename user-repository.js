@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import DBLocal from 'db-local'
 import crypto from 'node:crypto'
-import { SALT_ROUND } from './config.js'
+import { SALT_ROUNDS } from './config.js'
 const { Schema } = new DBLocal({ path: './db' })//Creació de la base de dades
 
 //Creem un esquema per les dades amb els camps especificats
@@ -21,7 +21,7 @@ export class UserRepository {
         Validation.password(password)
 
         //2. Asegurarse que el username no existeix
-        const user=User.findOne({username})
+        const user=await User.findOne({username})
 
         if(user) throw new Error('username already exists')
         
@@ -29,7 +29,7 @@ export class UserRepository {
         //Millor que el generi la base de dades
         const id=crypto.randomUUID()
 
-        const hashedPassword= await bcrypt.hash(password, SALT_ROUND);
+        const hashedPassword= await bcrypt.hash(password, SALT_ROUNDS);
 
         //4. Creem l'usuari
 

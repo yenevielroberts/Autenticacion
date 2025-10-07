@@ -20,9 +20,16 @@ app.get('/', (req, res) => {
     res.render("signupForm")
 })
 
-app.post('/signup',(req, res)=>{
+
+app.post ('/signup',async (req, res)=>{
+    console.log("cuerpo",req.body)
 
     const {username, password}=req.body//Obtengo los valores del body enviado en el json
-
+    try{
+        const id= await UserRepository.create({username, password});
+        res.send({id})
+    }catch(error){
+        res.status(400).send(error.message)
+    }
     
 })
