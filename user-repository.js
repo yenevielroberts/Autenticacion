@@ -6,7 +6,7 @@ const { Schema } = new DBLocal({ path: './db' })//Creació de la base de dades
 
 //Creem un esquema per les dades amb els camps especificats
 const User = Schema('User', {//Es com definir una taula
-    id_: { type: String, required: true },//el camp id serà de tipus string i serà obligatori
+    _id: { type: String, required: true },//el camp id serà de tipus string i serà obligatori
     username: { type: String, required: true },
     password: { type: String, required: true }
 })
