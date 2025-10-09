@@ -21,26 +21,44 @@ export class UserRepository {
         Validation.password(password)
 
         //2. Asegurarse que el username no existeix
-        const user=await User.findOne({username})
+        const user = await User.findOne({ username })
 
-        if(user) throw new Error('username already exists')
-        
+        if (user) throw new Error('username already exists')
+
         //3. Creem un id com si fos base de dades normal
         //Millor que el generi la base de dades
-        const id=crypto.randomUUID()
+        const id = crypto.randomUUID()
 
-        const hashedPassword= await bcrypt.hash(password, SALT_ROUNDS);
+        const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
         //4. Creem l'usuari
 
         User.create({
-            _id:id,
+            _id: id,
             username,
-            password:hashedPassword
+            password: hashedPassword
         }).save()
 
         return id
     }
+
+    static async login({ username, password }) {
+        Validation.username(username)
+        Validation.password(password)
+        //2. Asegurarse que el username existe
+        const user = User.findOne({ username })//Miro so existe el usuario
+        // Si no existe error
+        if (!user) throw new Error('username does not exist')
+        //no lo desencripta para compararlo    
+        const isValid = await bcrypt.compare(password, user.password)
+
+        if (!isValid) throw new Error('password is invalid')
+        //Per no enviar el password copiem tot el contingut menys el password
+        const { password: _, ...publicUser } = user//copio la variable password en publicUser
+
+        return publicUser
+    }
+
 
 
 }

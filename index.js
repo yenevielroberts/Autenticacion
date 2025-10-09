@@ -34,6 +34,13 @@ app.post ('/signup',async (req, res)=>{
     
 })
 
+
+app.post('/login', async(req,res)=> {
+
+    const{username, password}=req.body
+    
+})
+
 app.get('/protected', (req,res)=>{
     res.render('protected')
 })
