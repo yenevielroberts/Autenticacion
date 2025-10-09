@@ -46,7 +46,7 @@ export class UserRepository {
 }
 
 class Validation {
-    //static que no nessecito fer un objecte de la classe per cridar un mètode de la classe
+    //static->No nessecito fer un objecte de la classe per cridar un mètode de la classe
     static username(username) {
         if (typeof username != 'string') throw new Error('username must be a string');
         if (username.length < 3) throw new Error('Username superior a 3 caracteres');
@@ -55,7 +55,6 @@ class Validation {
     static password(password) {
         if (typeof password != 'string') throw new Error('sdfjkl must be a string');
         if (password.length < 6) throw new Error('password superior a 5 caracteres');
-
 
     }
 }

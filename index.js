@@ -34,4 +34,10 @@ app.post ('/signup',async (req, res)=>{
     
 })
 
+app.get('/protected', (req,res)=>{
+    res.render('protected')
+})
+
+
+
 app.listen(PORT, () => console.log(`Server listening on http://localhost:${PORT}`))

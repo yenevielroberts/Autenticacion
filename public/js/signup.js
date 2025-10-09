@@ -30,6 +30,11 @@ signupForm?.addEventListener('submit', e => {
             if (res.ok) {
                 signupSpan.innerText = 'Usuario registrado. ..Entrando..'
                 signupSpan.style.color = 'green'
+                signupSpan.classList.add("success")
+
+                setTimeout(()=>{
+                    window.location.href="/protected"
+                },2000)
             } else {
                 signupSpan.innerText = 'Error registrado usuario'
                 signupSpan.style.color = 'red'
