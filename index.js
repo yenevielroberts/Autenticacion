@@ -1,17 +1,17 @@
 import express from 'express';
 import { PORT, SECRET_JWT_KEY } from './config.js'
 import { UserRepository } from './user-repository.js';
+import cookieParser from 'cookie-parser';
 
 
 const app = express();
-
+//Declaro lo que usaré
 app.use(express.json());//Se puede utilizar este en vez de bodyparse()
-app.use(express.static("public"))
+app.use(express.static("public"))//le digo como tiene que tratar los archivos dentro de esa carpeta
 app.set('view engine', 'ejs')//Quiere decir que quiero usar este motor
 app.set('views', './views')//Le digo donde estarán las vistas
+app.use(cookieParser())
 
-
-app.listen(PORT, () => console.log(`Server listening on http://localhost:${PORT}`))
 
 //Inicio de los endpoints
 
@@ -33,3 +33,5 @@ app.post ('/signup',async (req, res)=>{
     }
     
 })
+
+app.listen(PORT, () => console.log(`Server listening on http://localhost:${PORT}`))
